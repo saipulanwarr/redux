@@ -7,12 +7,23 @@ import { getBooks, deleteBook } from '../redux/actions/books';
 import Spinner from '../layout/Spinner';
 
 class Book extends Component {
+  constructor(props){
+    super(props);
+  }
 
   async getBooks(){
-    await this.props.dispatch(getBooks());
+    const {profile} = this.props.auth;
+    const auth = {
+      authorization: profile.token,
+      "user-id": profile.id
+    };
+
+    // console.log(auth);
+    await this.props.dispatch(getBooks(auth));
   }
 
   componentDidMount(){
+    // console.log(this.props.auth.profile.token);
     this.getBooks();
   }
 
@@ -70,7 +81,8 @@ class Book extends Component {
 
 const mapStateToProps = (state) => {
   return{
-    books: state.books
+    books: state.books,
+    auth: state.auth
   }
 }
 

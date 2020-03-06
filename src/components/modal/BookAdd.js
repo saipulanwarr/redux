@@ -4,6 +4,8 @@ import { Modal, Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { createBook } from '../redux/actions/books';
 
+import { withRouter } from 'react-router-dom';
+
 class BookAdd extends Component{
     state = {
         name: '',
@@ -22,6 +24,8 @@ class BookAdd extends Component{
     onSubmit = async(e) => {
         e.preventDefault();
         await this.props.dispatch(createBook(this.state));
+        // this.props.history.push("/book");
+        // console.log(this.props);
         await this.props.onHide();
     }
     render(){
@@ -61,4 +65,4 @@ class BookAdd extends Component{
     }
 }
 
-export default connect()(BookAdd);
+export default withRouter(connect()(BookAdd));

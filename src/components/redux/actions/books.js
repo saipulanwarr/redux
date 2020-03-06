@@ -1,11 +1,12 @@
 import axios from 'axios';
 
-export const getBooks = () => {
+export const getBooks = (data) => {
     return{
         type: 'GET_BOOKS',
         payload: axios({
             method: "get",
-            url: "http://localhost:8000/book"
+            url: "http://localhost:8000/book",
+            headers: data
         })
     }
 }

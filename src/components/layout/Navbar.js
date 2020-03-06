@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class Navbar extends Component{
     render(){
+        const {profile} = this.props.auth;
+        console.log(profile);
         return(
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container">
@@ -32,4 +35,10 @@ class Navbar extends Component{
     }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => {
+    return{
+        auth: state.auth
+    }
+}
+
+export default connect(mapStateToProps)(Navbar);
